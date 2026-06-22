@@ -1,6 +1,30 @@
-.body{
-    margin: 0%;
+/* Custom Properties */
+:root {
+    --button-color: #8946E0;
+    --input-color: #3B427D;
 }
+
+
+/* General body */
+
+body{
+    margin: 0%;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: #323232;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+h1{
+    font-size: 60px;
+    font-weight: bold;
+}
+
+/* Header Content */
 
 .header-content{
     display:flex;
@@ -17,6 +41,122 @@
 }
 
 .header-content p:hover{
-    background-color: blue;
     cursor: pointer;
+    background-color: blue;
+}
+
+/* Introduction Content */
+
+.introduction{
+    text-align: center;
+}
+
+.introduction p{
+    margin-top: 60px;
+    font-size: 30px;
+}
+
+.introduction h1{
+    line-height: 0.9;
+    font-weight: bold;
+}
+
+/* Summary Content */
+.summary {
+    display: flex;
+    flex-direction: row;
+    gap:50px;
+}
+.summary img{
+    border-radius: 5px;
+    height: 39%;
+    width: 39%;
+    max-width: 100%;
+    max-height: auto;
+}
+
+.summary-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-text h1, .summary-text p{
+    margin: 0%;
+}
+
+
+.summary-text p{
+    font-size: 30px;
+}
+
+.summary-buttons{
+    margin-top: auto;
+}
+
+.summary-buttons button{
+    box-sizing: border-box;
+    background-color: var(--button-color);
+    border-radius: 5px;
+    font-size:30px;
+    border: none;
+    color: white;
+    width: 100%;
+    height: 60px;
+    margin-top: 20px;
+}
+
+.summary-buttons button:hover{
+    background-color: #633fcf;
+}
+
+/* Services Content */
+.services-details{
+    gap: 50px;
+    display:flex;
+}
+.services-details img{
+    height: 10%;
+    width: 10%;
+}
+
+.services-details p{
+    font-size: 30px;
+}
+
+/* Connection Content */
+.connection, .connection-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.connection-form input[type="text"],  .connection-form input[type="email"], .connection-form input[type="textarea"]{
+    background-color: var(--input-color);
+    border-radius: 5px;
+    border: none;
+    width: 600px;
+    height:70px;
+    margin-bottom: 20px;
+    color:white;
+    font-size:25px;
+    padding-left: 25px;
+}
+
+
+.connection-form input::placeholder{
+    color:white;
+    font-size: 25px;
+    opacity: 75%;
+}
+
+.connection-form input[type="submit"]{
+    align-items: center;
+    background-color: var(--button-color);
+    border-radius: 5px;
+    border: none;
+    height:70px;
+    width: 200px;
+    color:white;
+    font-size: 25px;
+    margin-bottom: 25px;
 }
