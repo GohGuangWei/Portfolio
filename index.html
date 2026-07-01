@@ -6,24 +6,20 @@
     <title>Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="header.js" type="text/javascript" defer></script>
+    <script src="footer.js" type="text/javascript" defer></script>
 </head>
 <body>
     <div class="bg"> 
-        <div class="content">
-            <header>
-                <!-- Header - Language, Home, Portfolio, Gallery, About Me -->
-                <div class="header-content">
-                    <img src="assets/lang_english.png">
-                    <p> Home</p>
-                    <p> Portfolio</p>
-                    <p> Gallery</p>
-                    <p> About Me</p>
-                </div>
-            </header>  
+        <header>
+            <!-- Header - Language, Home, Portfolio, Gallery, About Me -->
+            <header-component></header-component>
+        </header> 
+        <div class="content"> 
             <!-- Introduction -->
             <div class="introduction">
-                <p> Hello, My name is <br> </p>
-                <h1>Goh Guang Wei</h1>
+                <p id="hello"> Hello, my name is <br> </p>
+                <h1 id = "name">Goh Guang Wei</h1>
             </div>
 
 
@@ -41,8 +37,8 @@
                         </p>
                     </div>
                     <div class="summary-buttons">
-                        <button> Portfolio </button>
-                        <button> Gallery </button>
+                        <button onclick="window.location.href='portfolio.html'"> Portfolio  </button>
+                        <button onclick="window.location.href='portfolio.html'"> Gallery </button>
                     </div>
                 </div>
             </div>
@@ -95,19 +91,23 @@
             <!-- Connection -->
             <div class="connection">
                 <h1> Let's Connect! </h1>
-                <form class="connection-form">
-                    <input type="text" placeholder="Name"><br>
-                    <input type="email" placeholder="Email"><br>
-                    <input type="textarea" placeholder="Message" contenteditable><br>
-                    <input type="submit" value="Send">
+                <form class="connection-form" name="contact-form" onsubmit="event.preventDefault(), form()">
+                    <div class="forms">
+                        <input name="form-name" id="name-input" type="text" placeholder="Name">
+                        <p id="name-error" class="error-message">Placeholder</p>
+                    </div>
+                    <div class="forms">
+                        <input name="form-email" id="email-input" type="text" placeholder="Email">
+                        <p id="email-error" class="error-message">Placeholder</p>
+                    </div>
+                        <textarea placeholder="Message" ></textarea>
+                        <input type="submit" value="Send">
                 </form>
             </div>
         </div>
 
         <footer>
-            <div class="footer">
-                <p> Created by Goh Guang Wei</p>
-            </div>
+            <footer-component></footer-component>
         </footer>
     </div>
 </body>
