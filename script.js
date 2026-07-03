@@ -10,8 +10,6 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
     var timeoutID;
     var intervalID;
 
-
-
     //Typing effect, takes the element to edit, the text to replace, and speed of animation
     function textTypingEffect(element, text, delay = 50) {
 
@@ -37,13 +35,15 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
             //Starts the function
             step();
 
-        });     
+        }); 
+    
     }
 
     async function hello() {
         greeting.innerHTML = "";
         name.innerHTML = "";
 
+        //Goes through different languages
         if (currentLang === 0) {
             updatedGreeting = "Hello, my name is";
             updatedName = "Goh Guang Wei";
@@ -76,6 +76,17 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
             intervalID = setInterval(hello, 5000);
         }
     });
+
+    //Ensures it runs once when user opens it
+    if (!sessionStorage.getItem('functionExecuted')) {
+        hello();
+        intervalID = setInterval(hello, 5000);
+
+        //Sets flag so function won't trigger even after refresh
+        sessionStorage.setItem('functionExecuted', 'true');
+    }
+
+
 });
 
 function form(){

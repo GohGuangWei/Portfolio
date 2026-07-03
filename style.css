@@ -55,29 +55,22 @@ a{
 .header-content{
     display:flex;
     align-items: center;
-    gap:20px;
+    gap:10px;
     background-color: var(--second-bg-color);
     
 }
 
 .header-content p, .header-content img{
     position: relative;
-    margin: 0%;
-    margin: 20px;
-    padding:0px;
+    margin: 20px auto;
+    padding: 0px;
     text-align: center !important;
     font-size: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
 }
 
 .header-content img{
     width:4%;
     cursor: pointer;
-}
-
-.header-content p{
-    width:40%;
 }
 
 .header-content p:hover, header-content img:hover{
@@ -96,7 +89,7 @@ a{
     margin: 0 auto;
     display: block; 
     padding-top: 10px;
-    width: 50%;
+    width: 100%;
     border-bottom: 5px solid white;
     left: 0px;
     right: 0px;
