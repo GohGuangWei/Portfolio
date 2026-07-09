@@ -1,14 +1,60 @@
 document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists before getElementById runs.
     //Variables
-    const greeting = document.getElementById("hello");
-    const name = document.getElementById("name");
+
+    //ID tags 
+    const animTextPage = [
+        {
+            header_ID: "main-hello",
+            text_ID: "main-name"
+        },
+        {
+            header_ID: "about-greeting",
+            text_ID: "about-me"
+        }
+    ]
+
+    //Language
+    const langText = [
+        {
+            header_en: "Hello, my name is",
+            header_my: "Apa khabar, nama saya ialah",
+            header_ch: "你好，我名叫",
+            text_en: "Goh Guang Wei",
+            text_my: "Goh Guang Wei",
+            text_ch: "吴光卫"
+        },
+        {
+            header_en: "Get to know",
+            header_my: "Kenali",
+            header_ch: "了解",
+            text_en: "About Me",
+            text_my: "Tentang Saya",
+            text_ch: "关于我"
+        }
+    ]
 
     let currentLang = 0;
     let updatedGreeting = "";
     let updatedName = "";
+    let timeoutID;
+    let intervalID;
+    let currentPage = 0;
+    let currentLocation = window.location.pathname;
+    let helloFlag = false; //Allows only one hello() running at a time
+    let isWriting = false;
 
-    var timeoutID;
-    var intervalID;
+    //Checks for current page
+    if (currentLocation.includes('/index.html'))
+    {
+        currentPage = 0;
+    } else if (currentLocation.includes('/aboutMe.html')){
+        currentPage = 1;
+    }
+
+    //Sets variable to document ID
+    let headerText = document.getElementById(animTextPage[currentPage].header_ID);
+    let bottomText = document.getElementById(animTextPage[currentPage].text_ID);
+
 
     //Typing effect, takes the element to edit, the text to replace, and speed of animation
     function textTypingEffect(element, text, delay = 50) {
@@ -16,20 +62,22 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
         //Creates a Promise for async, provides delay for the second function with async
         return new Promise((resolve) => {
             let i = 0
+            isWriting = true;
 
             //Recursive function to continuously add text to the element
             function step(){
-                element.innerHTML += text[i];
-                i++;
-            
-                //When the written text is shorter than the given text
-                if (i < text.length){
-                    timeoutID = setTimeout(step, delay);
-                } else
-                {
-                    //returns the Promise for the second function to run
-                    resolve();
-                }
+                    element.innerHTML += text[i];
+                    i++;
+                
+                    //When the written text is shorter than the given text
+                    if (i < text.length){
+                        timeoutID = setTimeout(step, delay);
+                    } else
+                    {
+                        //returns the Promise for the second function to run
+                        isWriting = false;
+                        resolve();
+                    }
             }   
 
             //Starts the function
@@ -40,54 +88,81 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
     }
 
     async function hello() {
-        greeting.innerHTML = "";
-        name.innerHTML = "";
+        if(helloFlag === false){
+            helloFlag = true;
+            //Sets text to empty
+            headerText.innerHTML = "";
+            bottomText.innerHTML = "";
 
-        //Goes through different languages
-        if (currentLang === 0) {
-            updatedGreeting = "Hello, my name is";
-            updatedName = "Goh Guang Wei";
-            currentLang = 1;
-        } else if (currentLang === 1) {
-            updatedGreeting = "Apa khabar, nama saya ialah";
-            updatedName = "Goh Guang Wei";
-            currentLang = 2;
-        } else {
-            updatedGreeting = "你好，我名叫";
-            updatedName = "吴光卫";
-            currentLang = 0;
+            //Goes through different languages
+            if (currentLang === 0) {
+                updatedGreeting = langText[currentPage].header_en;
+                updatedName = langText[currentPage].text_en;
+                currentLang = 1;
+            } else if (currentLang === 1) {
+                updatedGreeting = langText[currentPage].header_my;
+                updatedName = langText[currentPage].text_my;
+                currentLang = 2;
+            } else {
+                updatedGreeting = langText[currentPage].header_ch;
+                updatedName = langText[currentPage].text_ch;
+                currentLang = 0;
+            }
+
+            await textTypingEffect(headerText, updatedGreeting);
+            await textTypingEffect(bottomText, updatedName);
+            helloFlag = false;
+        }else{
+            return;
         }
-
-
-        await textTypingEffect(greeting, updatedGreeting);
-        await textTypingEffect(name, updatedName);
     }
     
     // Clears greeting and name if tab is not active; prevents clashing
     document.addEventListener("visibilitychange", () => {
         // If tab is not active, clear all intervals and timeouts, alongside current greetings and names
         if (document.visibilityState === 'hidden'){
-            clearInterval(intervalID);
-            clearTimeout(timeoutID);
-            greeting.innerHTML = "";
-            name.innerHTML = "";
+            helloFlag = true;
         }else{
-            hello();
-            intervalID = setInterval(hello, 5000);
+            //Checks if the writing process is still active; stops new hello() while one is ongoing
+            if(isWriting === false){
+                helloFlag = false;
+                clearInterval(intervalID);
+                intervalID = null;
+            }
+
+            //Only set new interval if intervalID is empty
+            if(intervalID == null){
+                intervalID = setInterval(() => {hello();}, 5000);
+            }
+
         }
     });
 
     //Ensures it runs once when user opens it
-    if (!sessionStorage.getItem('functionExecuted')) {
+    if (!sessionStorage.getItem('helloTrigger')) {
         hello();
-        intervalID = setInterval(hello, 5000);
 
         //Sets flag so function won't trigger even after refresh
-        sessionStorage.setItem('functionExecuted', 'true');
+        sessionStorage.setItem('helloTrigger', 'true');
+    }
+
+    window.onbeforeunload = function(event){
+        this.sessionStorage.removeItem('helloTrigger');
     }
 
 
 });
+
+function contacts(element){
+    let id = element.id
+    if(id === "linkedin"){
+        window.open('https://www.linkedin.com/in/guangweigoh/', '_blank');
+    } else if (id === "whatsapp"){
+        window.open('https://api.whatsapp.com/send?phone=601115003757', '_blank');
+    } else if (id === "email"){
+        window.location.href='mailto:darrengohguangwei1@gmail.com' , '_blank';
+    }
+}
 
 function form(){
 
@@ -115,12 +190,15 @@ function form(){
         var errorDetected = false;
         var errorMsg;
 
+        //If field is empty
         if (field.value.trim() === ""){
             errorDetected = true;
             errorMsg = `Insert ${field.fieldName} in the field.`;
+        //If name field has special characters
         }else if(!patternName.test(field.value.trim()) && (field.fieldName == "name")){
             errorDetected = true;
             errorMsg = `No special characters in the field.`;
+        //Checks if email is valid
         }else if(!patternEmail.test(field.value.trim()) && (field.fieldName === "email")){
             errorDetected = true;
             errorMsg = `Email seems to be not valid. Check for special characters. `;
@@ -130,6 +208,7 @@ function form(){
             document.getElementById(field.name).style.border = "2px solid transparent";
         }
 
+        //If error detected, showcase error to user
         if (errorDetected == true)
         {
             document.getElementById(field.error).style.display = "block";
