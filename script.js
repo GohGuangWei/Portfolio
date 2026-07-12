@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
 
     //Ensures it runs once when user opens it
     if (!sessionStorage.getItem('helloTrigger')) {
-        hello();
+        intervalID = setInterval(() => {hello();}, 5000);
 
         //Sets flag so function won't trigger even after refresh
         sessionStorage.setItem('helloTrigger', 'true');
