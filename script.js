@@ -10,6 +10,14 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
         {
             header_ID: "about-greeting",
             text_ID: "about-me"
+        },
+        {
+            header_ID: "portfolio-greeting",
+            text_ID: "portfolio"
+        },
+        {
+            header_ID: "gallery-greeting",
+            text_ID: "gallery"
         }
     ]
 
@@ -30,6 +38,22 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
             text_en: "About Me",
             text_my: "Tentang Saya",
             text_ch: "关于我"
+        },
+        {
+            header_en: "Explore my works in the",
+            header_my: "Terokai kaya saya dalam",
+            header_ch: "探索我的作品在",
+            text_en: "Portfolio",
+            text_my: "Portfolio",
+            text_ch: "作品集"
+        },
+        {
+            header_en: "Creativity unbound in the",
+            header_my: "Kreativiti yang tidak terikat dalam",
+            header_ch: "不受束缚的创造力在",
+            text_en: "Gallery",
+            text_my: "Galeri",
+            text_ch: "画廊"
         }
     ]
 
@@ -49,6 +73,10 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
         currentPage = 0;
     } else if (currentLocation.includes('/aboutMe.html')){
         currentPage = 1;
+    } else if (currentLocation.includes('/portfolio.html')){
+        currentPage = 2;
+    } else if (currentLocation.includes('/gallery.html')){
+        currentPage = 3;
     }
 
     //Sets variable to document ID
@@ -112,6 +140,8 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
             await textTypingEffect(headerText, updatedGreeting);
             await textTypingEffect(bottomText, updatedName);
             helloFlag = false;
+            clearInterval(intervalID);
+            intervalID = setInterval(() => {hello();}, 5000);
         }else{
             return;
         }
@@ -132,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
 
             //Only set new interval if intervalID is empty
             if(intervalID == null){
-                intervalID = setInterval(() => {hello();}, 5000);
+                hello();
             }
 
         }
@@ -140,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
 
     //Ensures it runs once when user opens it
     if (!sessionStorage.getItem('helloTrigger')) {
-        intervalID = setInterval(() => {hello();}, 5000);
+        hello();
 
         //Sets flag so function won't trigger even after refresh
         sessionStorage.setItem('helloTrigger', 'true');
