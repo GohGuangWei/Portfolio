@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
             text_ID: "portfolio"
         },
         {
-            header_ID: "gallery-greeting",
-            text_ID: "gallery"
+            header_ID: "side-greeting",
+            text_ID: "side"
         }
     ]
 
@@ -51,9 +51,9 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
             header_en: "Creativity unbound in the",
             header_my: "Kreativiti yang tidak terikat dalam",
             header_ch: "不受束缚的创造力在",
-            text_en: "Gallery",
-            text_my: "Galeri",
-            text_ch: "画廊"
+            text_en: "Side Projects",
+            text_my: "Projek Sampingan",
+            text_ch: "副业项目"
         }
     ]
 
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => { //Ensures DOM exists befor
         currentPage = 1;
     } else if (currentLocation.includes('/portfolio.html')){
         currentPage = 2;
-    } else if (currentLocation.includes('/gallery.html')){
+    } else if (currentLocation.includes('/sideProjects.html')){
         currentPage = 3;
     }
 
@@ -248,4 +248,38 @@ function form(){
 
     });
     
+}
+
+var currentJobDesc = -1;
+
+//Triggers job desc change when hover on an element (previous = 0, future = 1)
+function onHover(job){
+    var desc = document.getElementById("job-history-description");
+
+
+    const jobSec = [
+        {
+            jobComp: document.getElementById('jobSec'),
+            desc: "As a Solution Consultant, I helped Cyclone Robotics through: <br><br> - Developing 32 JSON files for extraction in their RPA system, ensuring accurate results. <br> - Supervised over 100+ asset uploads to client website in collaboration with co-worker, ensuring data integrity. - Developed a RPA system that compiles all Excel files while maintaining data integrity and checking invalid data. <br>",
+        },
+        {
+            jobComp: document.getElementById("jobSec1"),
+            desc: "Currently open for any available jobs! Feel free to contact me below!"
+        }
+    ]
+
+    //Check if current hover already displayed previous job desc
+    if(job === currentJobDesc){
+        return;
+    }
+
+    currentJobDesc = job;
+    desc.innerHTML = "";
+    
+    for (let i = 0; i < jobSec.length; i++) {
+        jobSec[i].jobComp.style.borderColor = "transparent";
+    }
+
+    desc.innerHTML = jobSec[job].desc;
+    jobSec[job].jobComp.style.borderColor = "var(--button-hover-color)";
 }

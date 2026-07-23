@@ -3,23 +3,35 @@
     --button-color: #8946E0;
     --button-hover-color: #633fcf;
     --input-color: #3B427D;
+    --input-hover-color: #504997;
     --main-bg-color: #323232;
     --second-bg-color: #444444;
+
+    --personal-color: #3B7D3F;
+    --wip-color: #7D3B3C;
 }
 
 html, body{
     min-height: 100%;
 }
 
+#hidden{
+    filter: blur(4px);
+}
+
+
 /* General body */
 
 body{
     margin:0%;
-    color: white;
+    font-family: "Inter";
+    font-style: normal;
+    color: #D4D1D1;
 }
 
 h1{
     line-height: 40px;
+    color: white;
 }
 
 .bg
@@ -51,7 +63,7 @@ h1{
 }
 
 p{
-    font-size: 30px;
+    font-size: 25px;
 }
 
 a{
@@ -164,17 +176,33 @@ a{
 }
 
 /* Services Content */
-.services-details{
-    gap: 50px;
+
+.services{
     display:flex;
-}
-.services-details img{
-    height: 10%;
-    width: 10%;
+    flex-direction: column;
+    gap: 50px;
 }
 
-.services-details p{
+.services-details{
+    display:flex;
+    flex-direction: row;
+    gap:50px;
+}
+.services-details img{
+    height: 20%;
+    width: 20%;
+    border-radius: 10px;
+}
+
+.services-text p, .services-text h2{
     font-size: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.services-text h2{
+    margin-bottom: 20px;
+    line-height: 25px;
 }
 
 /* Connection Content */
@@ -208,11 +236,14 @@ a{
     background-color: var(--input-color);
     border-radius: 5px;
     border: none;
-    width: 600px;
-    height:70px;
+    width: 580px;
+    height:100px;
+    min-height: 90px;
     color:white;
     font-size:25px;
     padding-left: 25px;
+    padding-top: 25px;
+    padding-right: 25px;
 }
 
 .connection-form input[type="submit"]{
@@ -245,6 +276,9 @@ a{
 }
 
 /* About Me Content */
+.working-experience{
+    min-height: 400px;
+}
 .aboutMe{
     display:flex;
     margin-bottom: 20px;
@@ -260,8 +294,26 @@ a{
 
 .aboutMe h1, .aboutMe p{
     margin:0;
-    margin-left: 20px;
+    margin-left: 40px;
+}
 
+.working-history{
+    display: flex;
+    flex-direction: column;
+    margin-right: 80px;
+    gap: 80px;
+
+}
+
+.past-job-component p{
+    margin: 0;
+    font-size: 25px;
+    min-width: 600px;
+    text-align: center;
+    padding:5px;
+    border-radius: 10px;
+    background-color: var(--input-color);
+    border: 8px solid transparent;
 }
 
 /* Social Media Content */
@@ -288,13 +340,16 @@ a{
     cursor: pointer;
 }
 
+.accounts:hover{
+    background-color:  var(--input-hover-color);
+}
+
 .accounts p{
     word-wrap: break-word;
     text-align: center;
     max-width: 87%;
     font-size: 36px;
     font-weight: bold;
-    font-family: "Inter";
 }
 
 
@@ -326,6 +381,9 @@ a{
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+.portfolio-object:hover{
+    background-color:  var(--input-hover-color);
+}
 
 .portfolio-detail{
     display:flex;
@@ -340,7 +398,7 @@ a{
 }
 
 .portfolio-tag p{
-    background-color: #3B7D3F;
+    background-color: var(--personal-color);
     border: 3px solid black;
     border-radius: 5px;
     font-size: 20px;
@@ -350,24 +408,23 @@ a{
     padding: 5px;
 }
 
+#wip p{
+    background-color: var(--wip-color);
+}
+
 .portfolio-name-desc{
     width: 100%;
     text-align: center;
     text-justify: auto;
 }
 
-.portfolio-name-desc h1, .portfolio-name-desc-p{
-    margin: 40px 5px;
+.portfolio-name-desc h1, .portfolio-name-desc p{
+    margin: 40px 20px;
 }
 
 .portfolio-name-desc h1{
     font-weight: bold;
 }
-
-.portfolio-name-desc p{
-    font-size: 25px;
-}
-
 
 
 /* Footer Content */
