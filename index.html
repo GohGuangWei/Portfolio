@@ -96,7 +96,7 @@
             <!-- Connection -->
             <div class="connection">
                 <h1> Let's Connect! </h1>
-                <form class="connection-form" name="contact-form" onsubmit="event.preventDefault(), form()">
+                <form class="connection-form" name="contact-form" id="form" onsubmit="return form(event)" action="https://formspree.io/f/xkodvarv" method="post">
                     <div class="forms">
                         <input name="form-name" id="name-input" type="text" placeholder="Name">
                         <p id="name-error" class="error-message">Placeholder</p>
@@ -105,7 +105,7 @@
                         <input name="form-email" id="email-input" type="text" placeholder="Email">
                         <p id="email-error" class="error-message">Placeholder</p>
                     </div>
-                        <textarea placeholder="Message" ></textarea>
+                        <textarea name="message" placeholder="Message" ></textarea>
                         <input type="submit" value="Send">
                 </form>
             </div>

@@ -395,21 +395,27 @@ a{
 .portfolio-tag{
     display: flex;
     margin-right: 20px;
+    margin-left: auto;
 }
 
 .portfolio-tag p{
     background-color: var(--personal-color);
     border: 3px solid black;
     border-radius: 5px;
+    margin-left: 20px;
     font-size: 20px;
     padding:0%;
     text-align: center;
-    margin-left: auto;
     padding: 5px;
 }
 
-#wip p{
+#wip{
     background-color: var(--wip-color);
+}
+
+#python{
+    background: linear-gradient(to right, #306998, #FFD43B);
+    color: black;
 }
 
 .portfolio-name-desc{

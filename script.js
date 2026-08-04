@@ -194,7 +194,13 @@ function contacts(element){
     }
 }
 
-function form(){
+function direct(){
+    window.open('https://github.com/GohGuangWei/Blackjack', '_blank');
+}
+
+function form(event){
+
+    event.preventDefault();
 
     // Objects for each field
     const fields = [
@@ -212,7 +218,7 @@ function form(){
         }
     ]
 
-    const patternName = /^[a-zA-Z]+$/;
+    const patternName = /^[a-zA-Z\s]+$/;
     const patternEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     
@@ -244,6 +250,13 @@ function form(){
             document.getElementById(field.error).style.display = "block";
             document.getElementById(field.name).style.border = "2px solid red";
             document.getElementById(field.error).innerHTML = errorMsg;
+        }
+
+        if (!errorDetected) {
+            document.getElementById("form").submit();
+        } else
+        {
+            return false;
         }
 
     });
